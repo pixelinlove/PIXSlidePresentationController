@@ -8,10 +8,13 @@
 
 #import "PIXSlideTransitionAnimator.h"
 
+#define TRANSITION_DURATION     .35f
+#define PRESENTED_VIEW_OFFSET   -50.f
+
 @implementation PIXSlideTransitionAnimator
 
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
-    return 0.35;
+    return TRANSITION_DURATION;
 }
 
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
@@ -76,7 +79,7 @@
     
     [UIView animateWithDuration:transitionDuration animations:^{
         if (isPresenting) {
-            toView.frame = CGRectOffset(toFrame, -50, 0);
+            toView.frame = CGRectOffset(toFrame, PRESENTED_VIEW_OFFSET, 0);
         } else {
             // For a dismissal, the fromView slides off the screen.
             fromView.frame = CGRectOffset(fromFrame, -1 * fromFrame.size.width, 0);
